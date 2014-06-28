@@ -1,0 +1,22 @@
+{
+  "name": "quickpass",
+  "title": "quickpass",
+  "id": "jid1-iXMWIaOXih5uuQ",
+  "description": "Autocomplete usernames and passwords from a KeePassX database",
+  "author": "Juan Grande",
+	"homepage": "http://github.com/jgrande/quickpass",
+  "license": "GPL-3",
+  "version": "0.1",
+	"unpack": "true",
+	"preferences": [{
+		"name": "dbFilePath",
+		"title": "Database File Path",
+		"description": "The full path to the KeePassX database file",
+		"type": "file"
+	}, {
+		"name": "dbTimeoutMins",
+		"title": "Auto-close timeout",
+		"description": "The number of minutes after which the database should automatically be closed. Zero means no auto-close.",
+		"type": "integer"
+	}]
+}
