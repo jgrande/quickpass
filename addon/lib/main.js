@@ -130,7 +130,7 @@ tabs.on('ready', function(tab) {
 		contentScriptFile: [
 			self.data.url("jquery-1.11.1.min.js"),
 			self.data.url("guid.js"),
-			self.data.url("pm_username.js"),
+			self.data.url("page_worker.js"),
 		],
 	});
 	worker.port.on('fetch_username', function(data) {
@@ -155,7 +155,7 @@ cm.Item({
 	contentScriptFile: [
 		self.data.url("jquery-1.11.1.min.js"),
 		self.data.url("guid.js"),
-		self.data.url("cm_username.js"),
+		self.data.url("context_menu.js"),
 	],
 	onMessage: function(data) {
 		withDb(fetchUsername(data.node_guid, data.url));
@@ -168,7 +168,7 @@ cm.Item({
 	contentScriptFile: [
 		self.data.url("jquery-1.11.1.min.js"),
 		self.data.url("guid.js"),
-		self.data.url("cm_username.js"),
+		self.data.url("context_menu.js"),
 	],
 	onMessage: function(data) {
 		withDb(fetchPassword(data.node_guid, data.url));
