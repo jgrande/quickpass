@@ -7,20 +7,9 @@ I should start by letting you know that I'm no security expert, and I just
 hacked this addon because I was tired of having to open KeePassX every time
 I had to log into an application.
 
-While Quickpass makes use of KeePassX source code as much as possible to avoid
-incorporating new vulnerabilities, it's very likely that such vulnerabilities
-exist.
-
-THIS SOFTWARE IS PROVIDED BY THE AUTHOR "AS IS" AND ANY EXPRESS OR IMPLIED
-WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED WARRANTIES OF
-MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO
-EVENT SHALL THE AUTHOR BE LIABLE FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL,
-EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT
-OF SUBSTITUTE GOODS OR SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS
-INTERRUPTION) HOWEVER CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN
-CONTRACT, STRICT LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING
-IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY
-OF SUCH DAMAGE. 
+While Quickpass makes use of KeePassX source code as much as possible to try to
+avoid incorporating new vulnerabilities, it's very likely that such
+vulnerabilities exist.
 
 # License
 
@@ -29,24 +18,29 @@ the terms of the GNU General Public License as published by the Free Software
 Foundation, either version 3 of the License, or (at your option) any later
 version.
 
+This program is distributed in the hope that it will be useful, but WITHOUT ANY
+WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+PARTICULAR PURPOSE.
+
 Some parts of this program are covered by the more permissive BSD 3-Clause
 license and you are free to distribute and/or modify those parts under the
 terms of such license.
 
 # How To Use
 
-- Download the latest version of Quickpass as an XPI package.
-- Install the add-on using Firefox's Add-Ons Manager "Install Add-On from
-  File..." feature.
-- Configure the plugin clicking on the "Preferences" button in Firefox's
-  Add-Ons Manager. It's very important that you complete this step as you
-	need to point Quickpass to the correct KeePassX database file.
-- Go to your favourite web app.
-- Move focus to the "Username" field and press `CTRL+k`.
-- Enter your passphrase.
-- Move focus to the "Password" field and press `CTRL+k`.
-- Your username and password should have been autocompleted for you by
-  Quickpass!
+1. Download the latest version of Quickpass as an XPI package (not yet
+	 available, sorry).
+2. Install the add-on using Firefox's Add-Ons Manager "Install Add-On from
+   File..." feature.
+3. Configure the plugin clicking on the "Preferences" button in Firefox's
+   Add-Ons Manager. It's very important that you complete this step as you
+  	need to point Quickpass to the correct KeePassX database file.
+4. Go to your favourite web app.
+5. Move focus to the "Username" field and press `CTRL+k`.
+6. Enter your passphrase.
+7. Move focus to the "Password" field and press `CTRL+k`.
+8. Your username and password should have been autocompleted for you by
+   Quickpass!
 
 # How Does It Work?
 
@@ -60,8 +54,8 @@ pasted.
 For this approach to work, it's very important that the URLs you store in the
 KeePassX database are patterns instead of exact matches. For example,
 `https://accounts.google.com/*` will work fine if you want to use Quickpass to
-log into Goggle's applications, however `https://accounts.google.com/` will
-probably not work.
+log into Google's applications, however `https://accounts.google.com/` won't
+work.
 
 # How Do I Build It From Source?
 
