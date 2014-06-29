@@ -89,7 +89,7 @@ the project:
 
 - `keepassx_cbind`: a small set of C functions that wrap the KeePassX features
   used by the add-on. To compile this part you need to meet all KeePassX
-  pre-requisites which you can find [here][keepassx-install]. In adittion you
+  pre-requisites which you can find [here][keepassx-install]. In addition you
   need CMake version 2.8.11 -or newer- and Git.
 
 - `addon`: the code of the Firefox extension itself. To run and compile the
@@ -154,7 +154,7 @@ point to a test database. Then you can then open `addon/test/test.html` and
 test the add-on by pressing `CTRL+k` in the input fields.
 
 I would recommend you to run the add-on using a profile so preferences are
-persisted accross runs:
+persisted across runs:
 
     cfx run -p profile
 
@@ -164,9 +164,9 @@ listed in the `.gitignore` file, so it won't be seen by Git.
 ### Build The XPI Package
 
 After running the add-on, and once you're happy with the changes you've made,
-you can assemble your code into a new XPI package. Doing that is very easy too:
+you can assemble your code into a new XPI package. Doing so is very easy too:
 
     cfx xpi
 
 You can then install your version of the add-on in the same way you did with
-any XPI package.
+the official XPI package.
