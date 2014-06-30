@@ -1,7 +1,21 @@
 # Quickpass
 
 Quickpass is a Mozilla Firefox add-on that lets you autocomplete usernames and
-passwords from a [KeePassX][keepassx] database using one easy keyboard shortcut.
+passwords from a [KeePassX][keepassx] database using one simple keyboard
+shortcut.
+
+The project is in its very early stages, so I'm probably the only one that
+might find it useful. It is currently unstable and it lacks many things: error
+messages, support for databases encrypted with key files, matching more than
+one search result -- among other things. It will, from time to time, completely
+crash your Firefox instance. However, I expect to slowly improve the add-on as
+I use it.
+
+The currently supported platforms are Linux (64-bits) and OS X Mavericks. The
+add-on has been tested on Firefox 29 running on both Ubuntu Linux 13.10 and OS
+X Mavericks. It will probably work without problems on other platforms if you
+compile it from source, so please feel free to try and let me know if it works
+for you.
 
 [keepassx]: http://keepassx.org/
 
@@ -12,10 +26,10 @@ hacked this addon because I was tired of having to open KeePassX every time
 I had to log into an application.
 
 While Quickpass reuses KeePassX source code as much as possible to try to
-minimize the number of vulnerabilities, it's very likely that such
+minimize the number of bugs and vulnerabilities, it's very likely that such
 vulnerabilities exist.
 
-I am in no way responsible for any loss or damage that may result directly or
+I am not responsible for any loss or damage that may result directly or
 indirectly from the use of this program. I do not recommend using this program
 to handle sensitive information such as home banking passwords.
 
