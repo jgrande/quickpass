@@ -88,15 +88,15 @@ function fetchPassword(worker, node_guid, url) {
 }
 
 // `withDb` calls `f` passing a KeePassX database as first parameter. The
-// database passed is the one referenced by the global variable `keepassx`. A
-// panel may be opened asking the user for the passphrase if the database
+// database passed is the one referenced by the global variable `keepassx`.
+// A panel may be opened asking the user for the passphrase if the database
 // hasn't already been opened.
 //
 function withDb(f) {
 	if (!keepassx.isOpen()) {
 		var p = panel.Panel({
 			width: 400,
-			height: 150,
+			height: 120,
 			contentURL: self.data.url("passphrase.html"),
 			contentScriptFile: [
 				self.data.url("jquery-1.11.1.min.js"),
