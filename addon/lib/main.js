@@ -28,7 +28,7 @@
 // IN ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
 // POSSIBILITY OF SUCH DAMAGE. 
 
-var chrome = require("chrome");
+const { Cc, Ci } = require("chrome");
 var buttons = require('sdk/ui/button/action');
 var tabs = require("sdk/tabs");
 var cm = require("sdk/context-menu");
@@ -37,55 +37,11 @@ var self = require("sdk/self");
 var keepassxdb = require("./keepassxdb");
 var pageMod = require("sdk/page-mod");
 var prefs = require("sdk/simple-prefs").prefs;
+var winutils = require("sdk/window/utils");
+var hotkeys = require("sdk/hotkeys");
 var keepassx = new keepassxdb.KeePassX();
 
-// `getEntry` receives a passphrase and a url and returns an entry that
-// matches `url` from the database refered by the global variable
-// `keepassx`. If the database is not open, the passphrase is used to
-// open it.
-// 
-// NOTE: this function has been deprecated to keep the database opening
-// logic separate
-//
-function getEntry(passphrase, url) {
-	if (!keepassx.isOpen()) {
-		console.log("database was not open, opening");
-		keepassx.open(prefs.dbFilePath, passphrase, prefs.dbTimeoutMins);
-	}
-	if (keepassx.isOpen()) {
-		console.log("database open, searching");
-		var entry = keepassx.search(url);
-		return entry;
-	} else {
-		console.log("Failed to open db");
-	}
-}
-
-// `fetchUsername` returns a function that takes a KeePassX database, searches
-// the given url and emits a 'username_available' event to the given worker
-// passing the username of the entry and the node_guid.
-//
-function fetchUsername(worker, node_guid, url) {
-	return function(db) {
-		var entry = db.search(url);
-		if (entry) {
-		  worker.port.emit('username_available', { node_guid: node_guid, username: entry.username });
-		}
-	}
-}
-
-// `fetchPassword` returns a function that takes a KeePassX database, searches
-// the given url and emits a 'password_available' event to the given worker
-// passing the username of the entry and the node_guid.
-//
-function fetchPassword(worker, node_guid, url) {
-	return function(db) {
-		var entry = db.search(url);
-		if (entry) {
-			worker.port.emit('password_available', { node_guid: node_guid, password: entry.password });
-		}
-	}
-}
+var focusManager = Cc["@mozilla.org/focus-manager;1"].getService(Ci.nsIFocusManager);
 
 // `withDb` calls `f` passing a KeePassX database as first parameter. The
 // database passed is the one referenced by the global variable `keepassx`.
@@ -122,23 +78,27 @@ function withDb(f) {
 	}
 }
 
-// Register the worker that listens for the shortcuts and calls back this
-// script to fetch username and password from the database.
+// Register hotkey to fetch username or password
 //
-tabs.on('ready', function(tab) {
-	var worker = tab.attach({
-		contentScriptFile: [
-			self.data.url("jquery-1.11.1.min.js"),
-			self.data.url("guid.js"),
-			self.data.url("page_worker.js"),
-		],
-	});
-	worker.port.on('fetch_username', function(data) {
-		withDb(fetchUsername(worker, data.node_guid, data.url));
-	});
-	worker.port.on('fetch_password', function(data) {
-		withDb(fetchPassword(worker, data.node_guid, data.url));
-	});
+hotkeys.Hotkey({
+    combo: "accel-shift-p",
+    onPress: function() {
+        var el = winutils.getFocusedElement();
+        var url = tabs.activeTab.url;
+        if (el && el.tagName === 'INPUT') {
+            withDb(function(db) {
+                var entry = db.search(url);
+                if (entry) {
+                    if (el.getAttribute('type') === 'password') {
+                        el.setAttribute('value', entry.password);
+                    } else {
+                        el.setAttribute('value', entry.username);
+                    }
+                }
+                focusManager.setFocus(el, 0);
+            });
+        }
+    }
 });
 
 /*
