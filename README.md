@@ -33,6 +33,7 @@ I am not responsible for any loss or damage that may result directly or
 indirectly from the use of this program. I do not recommend using this program
 to handle sensitive information such as home banking passwords.
 
+
 ## License
 
 This program is free software: you can redistribute it and/or modify it under
@@ -62,18 +63,18 @@ terms of such license.
 
 4. Go to your favourite web app.
 
-5. Focus the username field and press `CTRL+k`.
+5. Focus on the username field and press `Ctrl+L` in Linux or `Cmd+L` in Mac.
 
 6. Enter your passphrase.
 
-7. Focus the password field and press `CTRL+k`.
+7. Focus on the password field and use the same keyboard shortcut as before.
 
 8. Your username and password should have been autocompleted for you by
    Quickpass!
 
 ## How Does It Work?
 
-If you press `CTRL+k` while an input field is focused, Quickpass will open the
+If you press `Accel+L` while an input field is focused, Quickpass will open the
 KeePassX database and will search for an entry whose URL field matches the
 current website's URL. If a match is found, then the username field of the
 entry will be pasted into the input field, unless the value of the HTML `type`
@@ -157,30 +158,26 @@ OS X  | 64-bits      | libkeepassx_cbind.Darwin_x86_64.so
 You can obtain a library by compiling it from source code, or downloading one
 of the already compiled versions (not yet available, sorry).
 
-Running the add-on is very easy using the Mozilla Add-On SDK. After activating
-the SDK, run the following command:
+Running the add-on is very easy using [Mozilla's Add-On SDK][addon-sdk]. After
+installing the SDK, run the following command:
 
     cd quickpass/addon
-    cfx run
+    jpm run -b `which firefox`
 
 You should see a new Firefox window. First of all, configure the add-on to
-point to a test database. Then you can then open `addon/test/test.html` and
-test the add-on by pressing `CTRL+k` in the input fields.
-
-I would recommend you to run the add-on using a profile so preferences are
-persisted across runs:
-
-    cfx run -p profile
-
-This command will create a new profile in the `profile` folder, which is already
-listed in the `.gitignore` file, so it won't be seen by Git.
+point to a test database. Then you can open `addon/test/test.html` and test the
+add-on by focusing on the input fields and pressing `Ctrl+L` in Linux or
+`Cmd+L` in Mac.
 
 ### Build The XPI Package
 
 After running the add-on, and once you're happy with the changes you've made,
 you can assemble your code into a new XPI package. Doing so is very easy too:
 
-    cfx xpi
+    jpm xpi
 
-You can then install your version of the add-on in the same way you did with
-the official XPI package.
+Unfortunately Firefox doesn't allow the installation of unsigned add-ons
+anymore, so if you want to test the XPI package that you just built you will
+need to follow the instructions [here][addon-temp-load].
+
+[addon-temp-load]: https://blog.mozilla.org/addons/2015/12/23/loading-temporary-add-ons/
