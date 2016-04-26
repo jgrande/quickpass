@@ -39,7 +39,7 @@ set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} ${CMAKE_CURRENT_SOURCE_DIR}/cmake)
 
 include(ExternalProject)
 
-set(KEEPASSX_VERSION 2.0-alpha6)
+set(KEEPASSX_VERSION "2.0.2")
 
 ExternalProject_Add(keepassx
 	PREFIX ${KEEPASSX_PREFIX}
