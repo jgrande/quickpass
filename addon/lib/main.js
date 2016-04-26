@@ -81,7 +81,7 @@ function withDb(f) {
 // Register hotkey to fetch username or password
 //
 hotkeys.Hotkey({
-    combo: "control-space",
+    combo: "accel-shift-l",
     onPress: function() {
         var el = winutils.getFocusedElement();
         var url = tabs.activeTab.url;
