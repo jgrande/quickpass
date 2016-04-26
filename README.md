@@ -51,8 +51,8 @@ terms of such license.
 
 ## How Do I Use It?
 
-1. Download the latest version of Quickpass as an XPI package (not yet
-	 available, sorry).
+1. Download the latest version of Quickpass as an XPI package from the
+	 [Releases][releases] page.
 
 2. Install the add-on using Firefox's Add-Ons Manager "Install Add-On from
    File..." feature.
@@ -71,6 +71,8 @@ terms of such license.
 
 8. Your username and password should have been autocompleted for you by
    Quickpass!
+
+[releases]: https://github.com/jgrande/quickpass/releases
 
 ## How Does It Work?
 
