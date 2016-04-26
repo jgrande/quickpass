@@ -5,7 +5,7 @@
   "author": "Juan Grande",
   "homepage": "http://github.com/jgrande/quickpass",
   "license": "GPL-3",
-  "version": "0.1",
+  "version": "0.0.1",
   "main": "lib/main.js",
   "unpack": true,
   "engines": {
