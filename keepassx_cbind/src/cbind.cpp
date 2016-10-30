@@ -1,4 +1,4 @@
-// Copyright (c) 2014 Juan Grande
+// Copyright (c) 2014, 2016 Juan Grande
 //
 // Redistribution and use in source and binary forms, with or without
 // modification, are permitted provided that the following conditions are
@@ -30,11 +30,6 @@
 
 #include "cbind.h"
 
-#include <QByteArray>
-#include <QDebug>
-#include <QScopedPointer>
-#include <QtGlobal>
-
 #include <iostream>
 
 #include <getopt.h>
@@ -43,9 +38,7 @@
 #include "core/Database.h"
 #include "core/Entry.h"
 #include "core/Group.h"
-#include "core/Metadata.h"
 #include "crypto/Crypto.h"
-#include "format/KeePass1Reader.h"
 #include "format/KeePass2Reader.h"
 #include "keys/CompositeKey.h"
 #include "keys/PasswordKey.h"
@@ -55,13 +48,15 @@ extern "C" void KeePassX_Init() {
 }
 
 extern "C" void* KeePassX_Open(const char* dbFilename, const char* passphrase) {
-		KeePass1Reader reader;
-		QScopedPointer<Database> db(reader.readDatabase(dbFilename, passphrase, NULL));
+		CompositeKey key;
+		key.addKey(PasswordKey(passphrase));
+		KeePass2Reader reader;
+		Database* db = reader.readDatabase(dbFilename, key);
 		if (!db) {
 			std::cout << "db is null\n";
 			return NULL;
 		}
-		return db.take();
+		return db;
 }
 
 extern "C" void KeePassX_FreeDb(void* dbptr) {
@@ -81,7 +76,6 @@ extern "C" KeePassX_Entry* KeePassX_Search(void* dbptr, const char* url) {
 	const Group* root = db->rootGroup();
 
 	if (!root) {
-		qDebug() << "root group is null";
 		return NULL;
 	}
 
