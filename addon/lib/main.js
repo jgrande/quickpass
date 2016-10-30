@@ -55,7 +55,7 @@ function withDb(f) {
 			height: 120,
 			contentURL: self.data.url("passphrase.html"),
 			contentScriptFile: [
-				self.data.url("jquery-1.11.1.min.js"),
+				self.data.url("jquery-3.1.1.min.js"),
 				self.data.url("panel_passphrase.js"),
 			],
 			onHide: function() {
